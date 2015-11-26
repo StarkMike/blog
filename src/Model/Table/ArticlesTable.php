@@ -45,11 +45,16 @@ class ArticlesTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->allowEmpty('title');
-
-        $validator
-            ->allowEmpty('body');
+            ->notEmpty('title')
+            ->requirePresence('title')
+            ->notEmpty('body')
+            ->requirePresence('body');
 
         return $validator;
     }
+
+    public function isOwnedBy($articleId, $userId) {
+        return $this->exists(['id' => $articleId, 'user_id' => $userId]);
+    }
 }
+?>
