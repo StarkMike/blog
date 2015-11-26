@@ -7,13 +7,14 @@
     "require": {
         "php": ">=5.4.16",
         "cakephp/cakephp": "~3.1",
+        "cakephp/debug_kit": "~3.0",
         "mobiledetect/mobiledetectlib": "2.*",
         "cakephp/migrations": "~1.0",
         "cakephp/plugin-installer": "*"
     },
     "require-dev": {
         "psy/psysh": "@stable",
-        "cakephp/debug_kit": "~3.2",
+        "cakephp/debug_kit": "~3.0",
         "cakephp/bake": "~1.1"
     },
     "suggest": {
@@ -36,5 +37,14 @@
         "post-autoload-dump": "Cake\\Composer\\Installer\\PluginInstaller::postAutoloadDump"
     },
     "minimum-stability": "stable",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "extra" : {
+        "heroku": {
+            "document-root": "app/webroot",
+            "index-document": "index.php",
+            "compile": [
+              "echo 'Copying DebugKit webroot directory' && cp -rfp $BUILD_DIR/Plugin/DebugKit/webroot $BUILD_DIR/app/webroot/debug_kit"
+            ]
+        }
+    }
 }
